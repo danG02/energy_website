@@ -261,7 +261,7 @@ a:hover {
 }
 
 .cta-button.primary:hover {
-    background: #28b03d;
+    background: var(--accent-primary);
     color: #fff;
     transform: translateY(-2px);
     box-shadow: var(--shadow-lg);
@@ -274,8 +274,9 @@ a:hover {
 }
 
 .cta-button.secondary:hover {
-    background: rgba(50, 215, 75, 0.1);
+    background: rgba(var(--accent-primary-rgb, 50,215,75), 0.1);
     color: #fff;
+    border-color: var(--accent-primary);
 }
 
 .cta-button.large {
