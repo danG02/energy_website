@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help Center - Energeia</title>
+    <meta name="description" content="Get help with Energeia - Find answers to frequently asked questions, learn how to use the app, and contact support.">
+    <link rel="icon" type="image/png" href="assests/app_icon.png">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        .help-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .help-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .help-header h1 {
+            color: var(--accent-primary);
+            margin-bottom: 1rem;
+        }
+        .help-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            color: var(--accent-primary);
+            text-decoration: none;
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .back-link svg {
+            margin-right: 0.5rem;
+        }
+        .help-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        .help-card {
+            background: var(--bg-secondary);
+            padding: 2rem;
+            border-radius: 1rem;
+            border: 1px solid var(--border-color);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .help-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+        .help-card h3 {
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        .help-card h3 svg {
+            margin-right: 0.75rem;
+            color: var(--accent-primary);
+        }
+        .help-card p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+        .help-card ul {
+            color: var(--text-secondary);
+            padding-left: 1.5rem;
+        }
+        .help-card li {
+            margin-bottom: 0.5rem;
+        }
+        .faq-section {
+            margin-bottom: 3rem;
+        }
+        .faq-section h2 {
+            color: var(--text-primary);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        .faq-item {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+        .faq-question {
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--bg-secondary);
+            transition: background-color 0.2s;
+        }
+        .faq-question:hover {
+            background: var(--bg-tertiary);
+        }
+        .faq-question h3 {
+            color: var(--text-primary);
+            margin: 0;
+            font-size: 1rem;
+        }
+        .faq-question svg {
+            color: var(--accent-primary);
+            transition: transform 0.2s;
+        }
+        .faq-question.active svg {
+            transform: rotate(180deg);
+        }
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            background: var(--bg-tertiary);
+        }
+        .faq-answer.active {
+            padding: 1.5rem;
+            max-height: 500px;
+        }
+        .faq-answer p {
+            color: var(--text-secondary);
+            margin: 0;
+            line-height: 1.6;
+        }
+        .contact-section {
+            background: var(--bg-secondary);
+            padding: 2rem;
+            border-radius: 1rem;
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+        .contact-section h2 {
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+        .contact-section p {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+        .contact-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        .contact-method {
+            padding: 1rem;
+            background: var(--bg-tertiary);
+            border-radius: 0.5rem;
+            border: 1px solid var(--border-color);
+        }
+        .contact-method h4 {
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+        .contact-method p {
+            color: var(--text-secondary);
+            margin: 0;
+        }
+        .contact-method a {
+            color: var(--accent-primary);
+            text-decoration: none;
+        }
+        .contact-method a:hover {
+            text-decoration: underline;
+        }
+        @media (max-width: 768px) {
+            .help-grid {
+                grid-template-columns: 1fr;
+            }
+            .contact-methods {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <img src="assests/app_icon.png" alt="Energeia App Icon" class="app-logo" style="height: 2.2rem; width: 2.2rem; vertical-align: middle; margin-right: 0.5rem; border-radius: 1rem; box-shadow: 0 2px 12px rgba(50,215,75,0.15); background: #181A1B;">
+                    <span class="logo-text">Energeia</span>
+                </div>
+                <div class="nav-menu">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="privacy-policy.html" class="nav-link">Privacy</a>
+                    <a href="terms-of-service.html" class="nav-link">Terms</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="help-content">
+            <a href="index.html" class="back-link">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                Back to Home
+            </a>
+
+            <div class="help-header">
+                <h1>Help Center</h1>
+                <p>Find answers to your questions and get the most out of Energeia</p>
+            </div>
+
+            <!-- Quick Help Cards -->
+            <div class="help-grid">
+                <div class="help-card">
+                    <h3>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2v20"></path>
+                            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                        </svg>
+                        Getting Started
+                    </h3>
+                    <p>New to Energeia? Here's how to begin tracking your energy drinks:</p>
+                    <ul>
+                        <li>Download and install the app</li>
+                        <li>Open the app and start tracking—no login required!</li>
+                        <li>Set your daily limits</li>
+                        <li>Start logging your drinks</li>
+                    </ul>
+                </div>
+
+                <div class="help-card">
+                    <h3>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 12l2 2 4-4"></path>
+                            <path d="M21 12c-1 0-2-1-2-2s1-2 2-2 2 1 2 2-1 2-2 2z"></path>
+                            <path d="M3 12c1 0 2-1 2-2s-1-2-2-2-2 1-2 2 1 2 2 2z"></path>
+                            <path d="M12 3c0 1-1 2-2 2s-2-1-2-2 1-2 2-2 2 1 2 2z"></path>
+                            <path d="M12 21c0-1 1-2 2-2s2 1 2 2-1 2-2 2-2-1-2-2z"></path>
+                        </svg>
+                        Features Guide
+                    </h3>
+                    <p>Learn about all the features Energeia offers:</p>
+                    <ul>
+                        <li>Daily tracking and limits</li>
+                        <li>Historical data and trends</li>
+                        <li>Customizable settings</li>
+                        <li>Wellness insights</li>
+                    </ul>
+                </div>
+
+                <div class="help-card">
+                    <h3>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 3v18h18"></path>
+                            <path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"></path>
+                        </svg>
+                        Tips & Best Practices
+                    </h3>
+                    <p>Maximize your health tracking experience:</p>
+                    <ul>
+                        <li>Set realistic daily limits</li>
+                        <li>Log drinks immediately</li>
+                        <li>Review your weekly insights</li>
+                        <li>Stay consistent with tracking</li>
+                    </ul>
+                </div>
+
+                <div class="help-card">
+                    <h3>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        </svg>
+                        Troubleshooting
+                    </h3>
+                    <p>Common issues and solutions:</p>
+                    <ul>
+                        <li>App not saving data</li>
+                        <li>Trouble with saving a log</li>
+                        <li>Data not loading</li>
+                        <li>Performance issues</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- FAQ Section -->
+            <div class="faq-section">
+                <h2>Frequently Asked Questions</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>How do I add a new energy drink to my log?</h3>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M6 9l6 6 6-6"/>
+                        </svg>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Tap the "+" button on the home screen, select your drink type, and enter the amount consumed. You can also customize the caffeine and sugar content if needed.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>Can I set custom daily limits for caffeine and sugar?</h3>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M6 9l6 6 6-6"/>
+                        </svg>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! Go to Settings > Daily Limits to customize your caffeine and sugar targets based on your health goals and recommendations.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>How do I change my accent color?</h3>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M6 9l6 6 6-6"/>
+                        </svg>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Tap the color wheel icon in the top navigation bar, then select your preferred accent color from the available options.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>Is my data secure and private?</h3>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M6 9l6 6 6-6"/>
+                        </svg>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Absolutely. We take your privacy seriously. All data is encrypted, and we never share your personal information with third parties. Read our <a href="privacy-policy.html">Privacy Policy</a> for more details.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>Can I export my tracking data?</h3>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M6 9l6 6 6-6"/>
+                        </svg>
+                    </div>
+                    <div class="faq-answer">
+                        <p>This feature isn't available yet. We're working on adding data export options in a future update!</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>What should I do if I reach my daily limit?</h3>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M6 9l6 6 6-6"/>
+                        </svg>
+                    </div>
+                    <div class="faq-answer">
+                        <p>When you reach your daily limit, the app will show a notification. Consider switching to water or other non-caffeinated beverages for the rest of the day.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>How do I delete my data?</h3>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M6 9l6 6 6-6"/>
+                        </svg>
+                    </div>
+                    <div class="faq-answer">
+                        <p>You can delete all your data by uninstalling the app. Since Energeia stores everything locally, nothing remains after deletion.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>Does Energeia work offline?</h3>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M6 9l6 6 6-6"/>
+                        </svg>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! Energeia works entirely offline.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>Will my data be backed up?</h3>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M6 9l6 6 6-6"/>
+                        </svg>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Energeia stores your data locally. If you uninstall the app, your data will be lost unless you back up your device.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>Will you add calorie tracking or brand suggestions?</h3>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M6 9l6 6 6-6"/>
+                        </svg>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We're exploring ways to make tracking smarter. Feel free to suggest features at <a href="mailto:features@energeia.app">features@energeia.app</a>.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Section -->
+            <div class="contact-section">
+                <h2>Still Need Help?</h2>
+                <p>Our support team is here to help you get the most out of Energeia</p>
+                
+                <div class="contact-methods">
+                    <div class="contact-method">
+                        <h4>Email Support</h4>
+                        <p><a href="mailto:help@energeia.app">help@energeia.app</a></p>
+                        <p>Response within 24 hours</p>
+                    </div>
+                    <div class="contact-method">
+                        <h4>In-App Support</h4>
+                        <p>Use the "Contact Support" option in the app settings</p>
+                        <p>Direct integration with our support system</p>
+                    </div>
+                    <div class="contact-method">
+                        <h4>Bug Reports</h4>
+                        <p><a href="mailto:bugs@energeia.app">bugs@energeia.app</a></p>
+                        <p>For technical issues and app bugs</p>
+                    </div>
+                    <div class="contact-method">
+                        <h4>Feature Requests</h4>
+                        <p><a href="mailto:features@energeia.app">features@energeia.app</a></p>
+                        <p>Suggest new features and improvements</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="footer-logo">Energeia</span>
+                    <p class="footer-tagline">Track your energy, effortlessly</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-section">
+                        <h4 class="footer-title">App</h4>
+                        <a href="index.html#features" class="footer-link">Features</a>
+                        <a href="index.html#screenshots" class="footer-link">Screenshots</a>
+                        <a href="index.html#cta" class="footer-link">Download</a>
+                    </div>
+                    <div class="footer-section">
+                        <h4 class="footer-title">Support</h4>
+                        <a href="help-center.html" class="footer-link">Help Center</a>
+                        <a href="privacy-policy.html" class="footer-link">Privacy Policy</a>
+                        <a href="terms-of-service.html" class="footer-link">Terms of Service</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="copyright">&copy; 2024 Energeia. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            const isActive = element.classList.contains('active');
+            
+            // Close all other FAQ items
+            document.querySelectorAll('.faq-question').forEach(item => {
+                item.classList.remove('active');
+                item.nextElementSibling.classList.remove('active');
+            });
+            
+            // Toggle current item
+            if (!isActive) {
+                element.classList.add('active');
+                answer.classList.add('active');
+            }
+        }
+    </script>
+    <script src="script.js"></script>
+</body>
+</html> 
