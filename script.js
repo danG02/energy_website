@@ -340,6 +340,85 @@ class PerformanceOptimizer {
     }
 }
 
+// Accent Color Picker Logic
+const ACCENT_COLORS = {
+    blue: {
+        primary: '#2979FF',
+        gradient: 'linear-gradient(135deg, #2979FF 0%, #00C6FF 100%)'
+    },
+    green: {
+        primary: '#32D74B',
+        gradient: 'linear-gradient(135deg, #32D74B 0%, #A3C9C7 100%)'
+    },
+    orange: {
+        primary: '#FFA726',
+        gradient: 'linear-gradient(135deg, #FFA726 0%, #FF7043 100%)'
+    },
+    red: {
+        primary: '#FF5252',
+        gradient: 'linear-gradient(135deg, #FF5252 0%, #FF1744 100%)'
+    },
+    puruple: {
+        primary: '#A259FF',
+        gradient: 'linear-gradient(135deg, #A259FF 0%, #6A82FB 100%)'
+    },
+    pink: {
+        primary: '#FF5CA7',
+        gradient: 'linear-gradient(135deg, #FF5CA7 0%, #FFB6B9 100%)'
+    }
+};
+
+function setAccentColor(colorKey) {
+    const color = ACCENT_COLORS[colorKey] || ACCENT_COLORS.green;
+    document.documentElement.style.setProperty('--accent-primary', color.primary);
+    document.documentElement.style.setProperty('--accent-gradient', color.gradient);
+    localStorage.setItem('accentColor', colorKey);
+    // Highlight selected
+    document.querySelectorAll('.accent-option').forEach(btn => {
+        btn.classList.toggle('selected', btn.dataset.color === colorKey);
+    });
+    
+    // Update screenshot images based on selected color
+    updateScreenshotImages(colorKey);
+}
+
+function updateScreenshotImages(colorKey) {
+    // Define the screenshot images and their corresponding elements
+    const screenshots = [
+        { filename: 'home_screen-portrait.png', selector: 'img[alt="Energeia Home Screen"]' },
+        { filename: 'daily_limit_hit-portrait.png', selector: 'img[alt="Energeia Daily Limit Hit"]' },
+        { filename: 'history_tracking-portrait.png', selector: 'img[alt="Energeia History Tracking"]' },
+        { filename: 'stats_overview-portrait.png', selector: 'img[alt="Energeia Stats Overview"]' },
+        { filename: 'custimization-portrait.png', selector: 'img[alt="Energeia Customization"]' }
+    ];
+    
+    // Update each screenshot image
+    screenshots.forEach(screenshot => {
+        const imgElement = document.querySelector(screenshot.selector);
+        if (imgElement) {
+            const newSrc = `assests/portrait/${colorKey}/${screenshot.filename}`;
+            imgElement.src = newSrc;
+        }
+    });
+}
+
+function getAccentColor() {
+    return localStorage.getItem('accentColor') || 'green';
+}
+
+function openAccentModal() {
+    const modal = document.getElementById('accentModal');
+    modal.style.display = 'flex';
+    modal.focus();
+    // Highlight current
+    setAccentColor(getAccentColor());
+}
+
+function closeAccentModal() {
+    const modal = document.getElementById('accentModal');
+    modal.style.display = 'none';
+}
+
 // Initialize all classes when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize all functionality
@@ -355,6 +434,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Add some interactive elements
     addInteractiveElements();
+
+    // Apply saved accent color
+    setAccentColor(getAccentColor());
+
+    // Accent toggle button
+    const accentToggle = document.getElementById('accentToggle');
+    if (accentToggle) {
+        accentToggle.addEventListener('click', openAccentModal);
+    }
+    // Modal close button
+    const accentModalClose = document.getElementById('accentModalClose');
+    if (accentModalClose) {
+        accentModalClose.addEventListener('click', closeAccentModal);
+    }
+    // Modal color options
+    document.querySelectorAll('.accent-option').forEach(btn => {
+        btn.addEventListener('click', () => {
+            setAccentColor(btn.dataset.color);
+            closeAccentModal();
+        });
+    });
+    // Close modal on Escape
+    document.getElementById('accentModal').addEventListener('keydown', e => {
+        if (e.key === 'Escape') closeAccentModal();
+    });
+    // Close modal on outside click
+    document.getElementById('accentModal').addEventListener('click', e => {
+        if (e.target === e.currentTarget) closeAccentModal();
+    });
 });
 
 // Additional interactive elements

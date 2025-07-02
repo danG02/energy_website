@@ -719,4 +719,111 @@ a:hover {
 
 ::-webkit-scrollbar-thumb {
     background: var(--accent-primary);
+}
+
+/* Accent Color Picker Modal */
+.accent-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    color: var(--text-secondary);
+    transition: all 0.2s ease;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+}
+.accent-toggle:hover {
+    background: var(--bg-tertiary);
+    color: var(--accent-primary);
+}
+
+.accent-modal {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+}
+
+.accent-modal-content {
+    background: #181A1B;
+    border-radius: 1.25rem;
+    padding: 2rem 2rem 1.5rem 2rem;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+    min-width: 320px;
+    max-width: 90vw;
+    text-align: center;
+    position: relative;
+}
+
+.accent-modal-title {
+    color: #fff;
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+.accent-options {
+    display: grid;
+    grid-template-columns: repeat(3, 64px);
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.accent-option {
+    width: 64px;
+    height: 64px;
+    border-radius: 1rem;
+    border: 3px solid transparent;
+    outline: none;
+    cursor: pointer;
+    transition: border 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    font-size: 1rem;
+}
+
+.accent-option.selected, .accent-option:focus {
+    border: 3px solid #fff;
+    box-shadow: 0 0 0 2px var(--accent-primary);
+}
+
+.accent-modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 2rem;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+.accent-modal-close:hover {
+    background: var(--bg-tertiary);
+}
+
+@media (max-width: 480px) {
+    .accent-modal-content {
+        min-width: 90vw;
+        padding: 1.25rem 0.5rem 1rem 0.5rem;
+    }
+    .accent-options {
+        grid-template-columns: repeat(3, 48px);
+        gap: 0.5rem;
+    }
+    .accent-option {
+        width: 48px;
+        height: 48px;
+    }
 } 

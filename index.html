@@ -22,20 +22,11 @@
                 <div class="nav-menu">
                     <a href="#features" class="nav-link">Features</a>
                     <a href="#screenshots" class="nav-link">Screenshots</a>
-                    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-                        <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="5"></circle>
-                            <line x1="12" y1="1" x2="12" y2="3"></line>
-                            <line x1="12" y1="21" x2="12" y2="23"></line>
-                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                            <line x1="1" y1="12" x2="3" y2="12"></line>
-                            <line x1="21" y1="12" x2="23" y2="12"></line>
-                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                        </svg>
-                        <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    <button class="accent-toggle" id="accentToggle" aria-label="Choose accent color">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/>
+                            <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2" fill="none"/>
+                            <path d="M2 12h4M18 12h4M12 2v4M12 18v4" stroke="currentColor" stroke-width="2"/>
                         </svg>
                     </button>
                 </div>
@@ -285,6 +276,22 @@
             </div>
         </div>
     </footer>
+
+    <!-- Accent Color Picker Modal -->
+    <div id="accentModal" class="accent-modal" aria-modal="true" role="dialog" tabindex="-1" style="display:none;">
+        <div class="accent-modal-content">
+            <h3 class="accent-modal-title">Choose Accent Color</h3>
+            <div class="accent-options">
+                <button class="accent-option" data-color="blue" style="background:#2979FF;"></button>
+                <button class="accent-option" data-color="green" style="background:#32D74B;"></button>
+                <button class="accent-option" data-color="orange" style="background:#FFA726;"></button>
+                <button class="accent-option" data-color="red" style="background:#FF5252;"></button>
+                <button class="accent-option" data-color="puruple" style="background:#A259FF;"></button>
+                <button class="accent-option" data-color="pink" style="background:#FF5CA7;"></button>
+            </div>
+            <button class="accent-modal-close" id="accentModalClose" aria-label="Close accent color picker">&times;</button>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
