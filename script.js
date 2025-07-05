@@ -137,12 +137,7 @@ class ButtonInteractions {
     }
 
     setupDownloadButtons() {
-        const downloadButtons = document.querySelectorAll('#downloadBtn, #finalDownloadBtn');
-        downloadButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                this.showNotification('App Store link coming soon!', 'info');
-            });
-        });
+        // No notification needed; buttons now link directly to the App Store.
     }
 
     setupComingSoonButtons() {
